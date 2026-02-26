@@ -8,14 +8,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Confluent.Kafka" Version="2.13.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Infrastructure\BarberBooking.Infrastructure.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Application\BarberBooking.Application.csproj" />
+		<ProjectReference Include="..\Infrastructure\BarberBooking.Infrastructure.csproj" />
+		<ProjectReference Include="..\BarberBooking.Contracts\BarberBooking.Contracts.csproj" />
+	</ItemGroup>
 
 </Project>

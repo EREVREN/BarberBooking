@@ -12,10 +12,15 @@ namespace BarberBooking.InfraStructure.Persistence.Configurations
 
             builder.Property(s => s.Name)
                    .IsRequired()
-                   .HasMaxLength(100);
+                   .HasMaxLength(50);
+
+            builder.Property(s => s.DurationMinutes)
+                   .IsRequired();
 
             builder.Property(s => s.Price)
-                   .HasPrecision(10, 2);
+                   .HasPrecision(10, 2)
+                   .IsRequired();
+
         }
     }
 }

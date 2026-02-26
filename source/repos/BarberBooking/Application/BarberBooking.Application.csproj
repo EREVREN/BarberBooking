@@ -7,7 +7,27 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="NewFolder1\**" />
+    <Compile Remove="NewFolder2\**" />
+    <Compile Remove="NewFolder3\**" />
+    <Compile Remove="NewFolder4\**" />
+    <EmbeddedResource Remove="NewFolder1\**" />
+    <EmbeddedResource Remove="NewFolder2\**" />
+    <EmbeddedResource Remove="NewFolder3\**" />
+    <EmbeddedResource Remove="NewFolder4\**" />
+    <None Remove="NewFolder1\**" />
+    <None Remove="NewFolder2\**" />
+    <None Remove="NewFolder3\**" />
+    <None Remove="NewFolder4\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BarberBooking.Contracts\BarberBooking.Contracts.csproj" />
     <ProjectReference Include="..\Domain\BarberBooking.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="14.0.0" />
   </ItemGroup>
 
 </Project>

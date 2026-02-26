@@ -28,6 +28,9 @@ namespace BarberBooking.Infrastructure.Migrations
                     b.Property<Guid>("BarberId")
                         .HasColumnType("char(36)");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<Guid>("CustomerId")
                         .HasColumnType("char(36)");
 
@@ -40,11 +43,12 @@ namespace BarberBooking.Infrastructure.Migrations
                     b.Property<DateTime>("StartTime")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("longtext");
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BarberId", "EndTime");
 
                     b.HasIndex("BarberId", "StartTime");
 
@@ -75,21 +79,19 @@ namespace BarberBooking.Infrastructure.Migrations
                     b.Property<Guid>("BarberId")
                         .HasColumnType("char(36)");
 
+                    b.Property<DateTime?>("Date")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<int>("DayOfWeek")
                         .HasColumnType("int");
 
-                    b.Property<TimeSpan>("EndTime")
-                        .HasColumnType("time(6)");
-
-                    b.Property<TimeSpan>("StartTime")
-                        .HasColumnType("time(6)");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("BarberId", "DayOfWeek")
-                        .IsUnique();
+                    b.HasIndex("BarberId", "Date");
 
-                    b.ToTable("WorkingDays");
+                    b.HasIndex("BarberId", "DayOfWeek");
+
+                    b.ToTable("BarberWorkingDays", (string)null);
                 });
 
             modelBuilder.Entity("BarberBooking.Domain.Entities.BlockedSlot", b =>
@@ -114,6 +116,35 @@ namespace BarberBooking.Infrastructure.Migrations
                     b.ToTable("BlockedSlots");
                 });
 
+            modelBuilder.Entity("BarberBooking.Domain.Entities.Customer", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("Address")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Customers");
+                });
+
             modelBuilder.Entity("BarberBooking.Domain.Entities.Service", b =>
                 {
                     b.Property<Guid>("Id")
@@ -128,8 +159,8 @@ namespace BarberBooking.Infrastructure.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
 
                     b.Property<decimal>("Price")
                         .HasPrecision(10, 2)
@@ -140,6 +171,33 @@ namespace BarberBooking.Infrastructure.Migrations
                     b.HasIndex("BarberId");
 
                     b.ToTable("Services");
+                });
+
+            modelBuilder.Entity("BarberBooking.Domain.Entities.BarberWorkingDay", b =>
+                {
+                    b.OwnsOne("BarberBooking.Domain.ValueObjects.WorkingHours", "WorkingHours", b1 =>
+                        {
+                            b1.Property<Guid>("BarberWorkingDayId")
+                                .HasColumnType("char(36)");
+
+                            b1.Property<TimeSpan>("End")
+                                .HasColumnType("time(6)")
+                                .HasColumnName("EndTime");
+
+                            b1.Property<TimeSpan>("Start")
+                                .HasColumnType("time(6)")
+                                .HasColumnName("StartTime");
+
+                            b1.HasKey("BarberWorkingDayId");
+
+                            b1.ToTable("BarberWorkingDays");
+
+                            b1.WithOwner()
+                                .HasForeignKey("BarberWorkingDayId");
+                        });
+
+                    b.Navigation("WorkingHours")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("BarberBooking.Domain.Entities.Service", b =>

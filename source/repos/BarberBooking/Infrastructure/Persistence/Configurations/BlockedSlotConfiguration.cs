@@ -10,10 +10,13 @@ namespace BarberBooking.InfraStructure.Persistence.Configurations
         {
             builder.HasKey(b => b.Id);
 
-            builder.HasIndex(b => new { b.BarberId, b.StartTime });
+            builder.Property(b => b.StartTime)
+                   .IsRequired();
 
-            builder.Property(b => b.StartTime).IsRequired();
-            builder.Property(b => b.EndTime).IsRequired();
+            builder.Property(b => b.EndTime)
+                   .IsRequired();
+
+            builder.HasIndex(b => new { b.BarberId, b.StartTime });
         }
     }
 }

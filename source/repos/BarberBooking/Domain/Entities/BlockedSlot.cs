@@ -6,16 +6,18 @@
         public DateTime StartTime { get; private set; }
         public DateTime EndTime { get; private set; }
 
-        protected BlockedSlot() { }
-
-        public BlockedSlot(Guid barberId, DateTime start, DateTime end)
+       
+        public BlockedSlot(Guid barberId, DateTime startTime, DateTime endTime)
         {
-            if (start >= end)
+            if (startTime >= endTime)
                 throw new ArgumentException("Invalid blocked slot");
 
             BarberId = barberId;
-            StartTime = start;
-            EndTime = end;
+            StartTime = startTime;
+            EndTime = endTime;
         }
+
+        protected BlockedSlot() { }
+
     }
 }

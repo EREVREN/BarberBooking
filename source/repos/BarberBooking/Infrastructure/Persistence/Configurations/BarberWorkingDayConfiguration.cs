@@ -1,22 +1,35 @@
-﻿using BarberBooking.Domain.Entities;
+﻿
+using BarberBooking.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-namespace BarberBooking.InfraStructure.Persistence.Configurations
+
+public sealed class BarberWorkingDayConfig : IEntityTypeConfiguration<BarberWorkingDay>
 {
-    public class BarberWorkingDayConfiguration : IEntityTypeConfiguration<BarberWorkingDay>
+    public void Configure(EntityTypeBuilder<BarberWorkingDay> builder)
     {
-        public void Configure(EntityTypeBuilder<BarberWorkingDay> builder)
+        builder.ToTable("BarberWorkingDays");
+
+        builder.HasKey(x => x.Id);
+
+        builder.Property(x => x.DayOfWeek)
+            .HasConversion<int>()
+            .IsRequired();
+
+        builder.Property(x => x.Date)
+            .IsRequired(false);
+
+        builder.OwnsOne(x => x.WorkingHours, wh =>
         {
-            builder.HasKey(w => w.Id);
+            wh.Property(p => p.Start)
+                .HasColumnName("StartTime")
+                .IsRequired();
 
-            builder.HasIndex(w => new { w.BarberId, w.DayOfWeek })
-                   .IsUnique();
+            wh.Property(p => p.End)
+                .HasColumnName("EndTime")
+                .IsRequired();
+        });
 
-            builder.Property(w => w.DayOfWeek)
-                   .HasConversion<int>();
-
-            builder.Property(w => w.StartTime).IsRequired();
-            builder.Property(w => w.EndTime).IsRequired();
-        }
+        builder.HasIndex(x => new { x.BarberId, x.DayOfWeek });
+        builder.HasIndex(x => new { x.BarberId, x.Date });
     }
 }

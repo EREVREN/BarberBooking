@@ -10,12 +10,23 @@ namespace BarberBooking.InfraStructure.Persistence.Configurations
         {
             builder.HasKey(c => c.Id);
 
-            builder.Property(c => c.Name)
-                   .HasMaxLength(100);
+            builder.Property(c => c.FirstName)
+                    .IsRequired()
+                   .HasMaxLength(20);
+
+            builder.Property(c => c.LastName)
+                    .IsRequired()
+                   .HasMaxLength(20);
 
             builder.Property(c => c.PhoneNumber)
                    .IsRequired()
                    .HasMaxLength(20);
+
+            builder.Property(c => c.Email)
+                  .HasMaxLength(20);
+
+            builder.Property(c => c.Address)       
+                    .HasMaxLength(200); 
 
             builder.HasIndex(c => c.PhoneNumber)
                    .IsUnique();

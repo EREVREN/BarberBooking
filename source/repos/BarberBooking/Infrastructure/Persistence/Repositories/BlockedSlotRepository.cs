@@ -30,4 +30,10 @@ public class BlockedSlotRepository : IBlockedSlotRepository
                 b.EndTime > start)
             .ToListAsync();
     }
+
+    public async Task AddAsync(BlockedSlot blockedSlot)
+    {
+        await _context.Set<BlockedSlot>().AddAsync(blockedSlot);
+        await _context.SaveChangesAsync();
+    }
 }

@@ -7,5 +7,7 @@ namespace BarberBooking.Application.Interfaces.Repositories
         Task<List<BlockedSlot>> GetForBarberAndDate(
         Guid barberId,
         DateTime date);
+
+        Task AddAsync(BlockedSlot blockedSlot);
     }
 }

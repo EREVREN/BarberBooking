@@ -1,0 +1,19 @@
+# .NET
+bin/
+obj/
+.vs/
+*.user
+*.suo
+*.cache
+*.log
+
+# EF
+Migrations/*.Designer.cs
+Migrations/*.resx
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Secrets
+appsettings.Development.json

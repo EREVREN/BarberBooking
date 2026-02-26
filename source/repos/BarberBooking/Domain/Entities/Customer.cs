@@ -2,14 +2,23 @@
 {
     public class Customer : Common.BaseEntity
     {
-        public string Name { get; private set; }
+        public string FirstName { get; private set; }
+        public string LastName { get; private set; }
         public string PhoneNumber { get; private set; }
+        public string? Email { get; private set; }
+        public string? Address { get; private set; }
+        
+       
 
         protected Customer() { }
 
-        public Customer(string name, string phoneNumber)
+        public Customer(string firstName, string lastName, string phoneNumber, string email, string address)
         {
-            Name = name;
+          
+            FirstName = firstName;
+            LastName = lastName;
+            Address = address;
+            Email = email;
             PhoneNumber = phoneNumber;
         }
     }

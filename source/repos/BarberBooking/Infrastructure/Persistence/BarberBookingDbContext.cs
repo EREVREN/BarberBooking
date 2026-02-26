@@ -13,9 +13,10 @@ public class BarberBookingDbContext : DbContext
 
     public DbSet<Barber> Barbers => Set<Barber>();
     public DbSet<Service> Services => Set<Service>();
+    public DbSet<Customer> Customers => Set<Customer>();    
     public DbSet<Appointment> Appointments => Set<Appointment>();
     public DbSet<BlockedSlot> BlockedSlots => Set<BlockedSlot>();
-    public DbSet<BarberWorkingDay> WorkingDays => Set<BarberWorkingDay>();
+    public DbSet<BarberWorkingDay> BarberWorkingDays => Set<BarberWorkingDay>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

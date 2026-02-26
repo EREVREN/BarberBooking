@@ -1,4 +1,5 @@
-﻿using BarberBooking.Application.Interfaces.Repositories;
+﻿using BarberBooking.Application.Customers.DTOs;
+using BarberBooking.Application.Interfaces.Repositories;
 using BarberBooking.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,15 +14,23 @@ public class CustomerRepository : ICustomerRepository
         _context = context;
     }
 
-    public async Task<Customer?> GetByPhoneAsync(string phoneNumber)
+    public async Task<CustomerDto> GetByPhoneAsync(string phoneNumber)
     {
-        return await _context.Set<Customer>()
+        return await _context.Set<CustomerDto>()
             .FirstOrDefaultAsync(c => c.PhoneNumber == phoneNumber);
     }
 
-    public async Task AddAsync(Customer customer)
+
+    public async Task<Customer> GetByIdAsync(Guid customerId)   
+        {
+        return await _context.Customers
+            .FirstOrDefaultAsync(c => c.Id == customerId);
+    }
+   
+    public async Task<Customer> AddAsync(Customer customer)
     {
-        await _context.Set<Customer>().AddAsync(customer);
+        await _context.Customers.AddAsync(customer);
         await _context.SaveChangesAsync();
+        return customer;
     }
 }

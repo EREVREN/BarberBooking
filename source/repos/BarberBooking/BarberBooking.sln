@@ -3,29 +3,30 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API", "API", "{D82C56D6-B2CD-F611-9E31-04638F7EC30E}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BarberBooking.API", "API\BarberBooking.API.csproj", "{C2091286-B994-4C34-B0BB-9E696D41C13E}"
 	ProjectSection(ProjectDependencies) = postProject
 		{25E2BE50-0633-4668-B620-DD8EE6C09715} = {25E2BE50-0633-4668-B620-DD8EE6C09715}
 		{51A4B47B-FAB9-42FD-8A7F-54F1838F071E} = {51A4B47B-FAB9-42FD-8A7F-54F1838F071E}
+		{6E1D8EE3-0ADE-4E59-854D-0FB6857175F7} = {6E1D8EE3-0ADE-4E59-854D-0FB6857175F7}
+		{F1795895-5185-482D-A6A4-18057FA6BDB0} = {F1795895-5185-482D-A6A4-18057FA6BDB0}
 	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{A74F262E-BDE7-D5D2-89E9-785413424D0A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BarberBooking.Application", "Application\BarberBooking.Application.csproj", "{25E2BE50-0633-4668-B620-DD8EE6C09715}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{996CEBED-A05B-5D42-3FF0-982E087A2599}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BarberBooking.Domain", "Domain\BarberBooking.Domain.csproj", "{6E1D8EE3-0ADE-4E59-854D-0FB6857175F7}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{DFEE68D8-A7D0-1A41-506C-9B74AA9A7B7B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BarberBooking.Infrastructure", "Infrastructure\BarberBooking.Infrastructure.csproj", "{51A4B47B-FAB9-42FD-8A7F-54F1838F071E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Çözüm Öğeleri", "Çözüm Öğeleri", "{AC80F682-3D55-C8F8-4895-A4A9EDD49434}"
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BarberBooking.Contracts", "BarberBooking.Contracts\BarberBooking.Contracts.csproj", "{F1795895-5185-482D-A6A4-18057FA6BDB0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotificationService", "NotificationService\NotificationService.csproj", "{E40CE173-CFA3-4A71-8AF1-4CAEF46BB38D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F1795895-5185-482D-A6A4-18057FA6BDB0} = {F1795895-5185-482D-A6A4-18057FA6BDB0}
 	EndProjectSection
 EndProject
 Global
@@ -86,15 +87,33 @@ Global
 		{51A4B47B-FAB9-42FD-8A7F-54F1838F071E}.Release|x64.Build.0 = Release|Any CPU
 		{51A4B47B-FAB9-42FD-8A7F-54F1838F071E}.Release|x86.ActiveCfg = Release|Any CPU
 		{51A4B47B-FAB9-42FD-8A7F-54F1838F071E}.Release|x86.Build.0 = Release|Any CPU
+		{F1795895-5185-482D-A6A4-18057FA6BDB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1795895-5185-482D-A6A4-18057FA6BDB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1795895-5185-482D-A6A4-18057FA6BDB0}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F1795895-5185-482D-A6A4-18057FA6BDB0}.Debug|x64.Build.0 = Debug|Any CPU
+		{F1795895-5185-482D-A6A4-18057FA6BDB0}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F1795895-5185-482D-A6A4-18057FA6BDB0}.Debug|x86.Build.0 = Debug|Any CPU
+		{F1795895-5185-482D-A6A4-18057FA6BDB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1795895-5185-482D-A6A4-18057FA6BDB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1795895-5185-482D-A6A4-18057FA6BDB0}.Release|x64.ActiveCfg = Release|Any CPU
+		{F1795895-5185-482D-A6A4-18057FA6BDB0}.Release|x64.Build.0 = Release|Any CPU
+		{F1795895-5185-482D-A6A4-18057FA6BDB0}.Release|x86.ActiveCfg = Release|Any CPU
+		{F1795895-5185-482D-A6A4-18057FA6BDB0}.Release|x86.Build.0 = Release|Any CPU
+		{E40CE173-CFA3-4A71-8AF1-4CAEF46BB38D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E40CE173-CFA3-4A71-8AF1-4CAEF46BB38D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E40CE173-CFA3-4A71-8AF1-4CAEF46BB38D}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E40CE173-CFA3-4A71-8AF1-4CAEF46BB38D}.Debug|x64.Build.0 = Debug|Any CPU
+		{E40CE173-CFA3-4A71-8AF1-4CAEF46BB38D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E40CE173-CFA3-4A71-8AF1-4CAEF46BB38D}.Debug|x86.Build.0 = Debug|Any CPU
+		{E40CE173-CFA3-4A71-8AF1-4CAEF46BB38D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E40CE173-CFA3-4A71-8AF1-4CAEF46BB38D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E40CE173-CFA3-4A71-8AF1-4CAEF46BB38D}.Release|x64.ActiveCfg = Release|Any CPU
+		{E40CE173-CFA3-4A71-8AF1-4CAEF46BB38D}.Release|x64.Build.0 = Release|Any CPU
+		{E40CE173-CFA3-4A71-8AF1-4CAEF46BB38D}.Release|x86.ActiveCfg = Release|Any CPU
+		{E40CE173-CFA3-4A71-8AF1-4CAEF46BB38D}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{C2091286-B994-4C34-B0BB-9E696D41C13E} = {D82C56D6-B2CD-F611-9E31-04638F7EC30E}
-		{25E2BE50-0633-4668-B620-DD8EE6C09715} = {A74F262E-BDE7-D5D2-89E9-785413424D0A}
-		{6E1D8EE3-0ADE-4E59-854D-0FB6857175F7} = {996CEBED-A05B-5D42-3FF0-982E087A2599}
-		{51A4B47B-FAB9-42FD-8A7F-54F1838F071E} = {DFEE68D8-A7D0-1A41-506C-9B74AA9A7B7B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5A925218-9BF5-4E1D-AC5F-1ED00890BC71}

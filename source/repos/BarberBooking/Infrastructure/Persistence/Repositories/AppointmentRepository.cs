@@ -1,13 +1,14 @@
 ﻿
-using Application.Interfaces.Repositories;
+using BarberBooking.Application.Appointments.Queries;
+using BarberBooking.Application.Interfaces.Repositories;
 using BarberBooking.Domain.Entities;
 using BarberBooking.Domain.Enums;
-
+using BarberBooking.Domain.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 
 namespace BarberBooking.Infrastructure.Persistence.Repositories;
 
-public class AppointmentRepository : IAppointmentRepository
+public partial class AppointmentRepository : IAppointmentRepository
 {
     private readonly BarberBookingDbContext _context;
 
@@ -39,6 +40,26 @@ public class AppointmentRepository : IAppointmentRepository
             .OrderBy(a => a.StartTime)
             .ToListAsync();
     }
+    public async Task<IReadOnlyList<TimeRange>> GetAppointmentsForBarberOnDate(
+        Guid barberId,
+        DateTime date)
+    {
+        var dayStart = date.Date;
+        var dayEnd = dayStart.AddDays(1);
+
+        return await _context.Appointments
+            .AsNoTracking()
+            .Where(a =>
+                a.BarberId == barberId &&
+                a.Status != AppointmentStatus.Cancelled &&
+                a.StartTime < dayEnd &&
+                a.EndTime > dayStart)
+            .OrderBy(a => a.StartTime)
+            .Select(a => new TimeRange(
+                a.StartTime,
+                a.EndTime))
+            .ToListAsync();
+    }
 
     /// <summary>
     /// Concurrency-critical overlap check
@@ -54,5 +75,51 @@ public class AppointmentRepository : IAppointmentRepository
                 a.Status != AppointmentStatus.Cancelled &&
                 start < a.EndTime &&
                 a.StartTime < end);
+    }
+
+    public async Task<Appointment?> GetByIdAsync(Guid id)
+    {
+        return await _context.Appointments
+            .AsNoTracking()
+            .FirstOrDefaultAsync(a => a.Id == id);
+    }
+    public async Task<List<Appointment>> GetAllAsync()
+    {
+        return await _context.Appointments
+            .AsNoTracking()
+            .OrderBy(a => a.StartTime)
+            .ToListAsync();
+    }
+    public async Task<int> CountAsync()
+    {
+        return await _context.Appointments.CountAsync();
+    }
+
+    public async Task<List<Appointment>> GetPagedAsync(int skip, int take)
+    {
+        return await _context.Appointments
+            .AsNoTracking()
+            .OrderByDescending(a => a.StartTime)
+            .Skip(skip)
+            .Take(take)
+            .ToListAsync();
+    }
+    public async Task<int> CountAsync(AppointmentFilter filter)
+    {
+        return await ApplyFilter(_context.Appointments, filter)
+            .CountAsync();
+    }
+
+    public async Task<List<Appointment>> GetPagedAsync(
+        AppointmentFilter filter,
+        int skip,
+        int take)
+    {
+        return await ApplyFilter(_context.Appointments, filter)
+            .AsNoTracking()
+            .OrderByDescending(a => a.StartTime)
+            .Skip(skip)
+            .Take(take)
+            .ToListAsync();
     }
 }
