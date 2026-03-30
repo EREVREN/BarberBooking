@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+
+.desktop-nav {
+  display: none;
+}
+
+@media (min-width: 768px) { /* Tailwind md */
+  .desktop-nav {
+    display: flex;
+  }
+}
+
+
+
+
+
