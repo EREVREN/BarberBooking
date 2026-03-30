@@ -36,7 +36,17 @@ Thumbs.db
 **/android/app/debug
 **/android/app/profile
 **/android/app/release
+**/.gradle/
+**/.kotlin/
+**/ios/Flutter/ephemeral/
+**/linux/flutter/ephemeral/
+**/macos/Flutter/ephemeral/
+**/windows/flutter/ephemeral/
 *.iml
+
+# EF
+Migrations/*.Designer.cs
+Migrations/*.resx
 
 # Secrets and local config
 **/.env
@@ -52,10 +62,3 @@ Thumbs.db
 **/*.mobileprovision
 **/GoogleService-Info.plist
 **/google-services.json
-# Additional Flutter local artifacts
-**/.gradle/
-**/.kotlin/
-**/ios/Flutter/ephemeral/
-**/linux/flutter/ephemeral/
-**/macos/Flutter/ephemeral/
-**/windows/flutter/ephemeral/

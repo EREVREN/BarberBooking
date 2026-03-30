@@ -50,4 +50,4 @@ flutter analyze .\apps\mobile
 
 - Secret-bearing local config files are intentionally ignored.
 - The committed `appsettings.json` files contain safe placeholder values only.
-- The original standalone web and mobile folders were copied into this repo under `apps/` for a cleaner GitHub layout.
+- Remote legacy history was merged and preserved, while the active project layout remains at the repository root.
